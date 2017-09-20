@@ -8,8 +8,8 @@ namespace Library.DataAccessLayer.DBAccess
         private readonly SqlConnection connection;
 
         public Users Users { get; set; }
-        /*public EmailTypes EmailTypes { get; set; }
-        public Contacts Contacts { get; set; }
+        public Roles Roles { get; set; }
+        /*public Contacts Contacts { get; set; }
         public Phones Phones { get; set; }
         public PhoneTypes PhoneTypes { get; set; }
         public Countries Countries { get; set; }
@@ -25,8 +25,8 @@ namespace Library.DataAccessLayer.DBAccess
             connection.Open();
 
             Users = new Users(connection);
-            /*EmailTypes = new EmailTypes(connection);
-            Contacts = new Contacts(connection);
+            Roles = new Roles(connection);
+            /*Contacts = new Contacts(connection);
             Phones = new Phones(connection);
             PhoneTypes = new PhoneTypes(connection);
             Countries = new Countries(connection);

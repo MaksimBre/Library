@@ -13,7 +13,7 @@ namespace Library.DataAccessLayer.ConsoleClient
         {
             Table.Width = 200;
             Table.Title = "Users";
-            Table.ColumnNames = new string[] { "Id", "Name", "User Name", "Password", "Email", "Date of birth", "Date joined" };
+            Table.ColumnNames = new string[] { "Id", "Name", "User Name", "Role", "Email", "Date joined" };
             Table.Setup();
 
             using (DBAccess.Library library = new DBAccess.Library(Properties.Settings.Default.LibraryDbConnection))
@@ -23,10 +23,15 @@ namespace Library.DataAccessLayer.ConsoleClient
                     Table.Insert(1, user.Id.ToString());
                     Table.Insert(2, user.Name);
                     Table.Insert(3, user.UserName);
-                    Table.Insert(4, user.Password);
+
+
+                    Table.Insert(4, "Role");
                     Table.Insert(5, user.Email);
-                    Table.Insert(6, user.DateOfBirth.ToString());
-                    Table.Insert(7, user.DateJoined.ToString());
+                    /*string dateOfBirth = Equals(user.DateOfBirth, null) ? "N/A" : user.DateOfBirth.Value.ToShortDateString();
+                    Table.Insert(6, dateOfBirth);*/
+                    string dateJoined = user.DateJoined.ToShortDateString();
+                    Table.Insert(6, dateJoined);
+                    Table.NewRow();
                 }
             }
         }

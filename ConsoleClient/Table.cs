@@ -87,9 +87,10 @@ namespace Library.DataAccessLayer.ConsoleClient
 
         public static void NewRow()
         {
+            /*row++;
             Console.SetCursorPosition(0, row);
             for (int i = 0; i < Width; i++) { Console.Write("-"); }
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, 0);*/
             row++;
         }
 

@@ -17,7 +17,7 @@ namespace Library.DataAccessLayer.DBAccess
 
         public IEnumerable<User> GetAll()
         {
-            using (SqlCommand command = new SqlCommand("SELECT * FROM Users ", connection))
+            using (SqlCommand command = new SqlCommand("EXEC UserGetAll", connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -32,7 +32,7 @@ namespace Library.DataAccessLayer.DBAccess
 
         public User GetById(int id)
         {
-            using (SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE Id = @Id", connection))
+            using (SqlCommand command = new SqlCommand("EXEC UserGetById @Id", connection))
             {
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
@@ -45,31 +45,30 @@ namespace Library.DataAccessLayer.DBAccess
                 }
             }
         }
-        /*public IEnumerable<Contact> Search(string name)
+        
+        public IEnumerable<User> Search(string name)
         {
-            using (SqlCommand command = new SqlCommand("SELECT *  FROM Contacts WHERE Name LIKE '@Name' ", connection))//?
+            using (SqlCommand command = new SqlCommand("EXEC UserSearch @Name ", connection))
             {
-                command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = name + "%";
+                command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = "%" + name + "%";
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    List<Contact> contacts = new List<Contact>();
+                    List<User> users = new List<User>();
                     while (reader.Read())
-                        contacts.Add(CreateContact(reader));
+                        users.Add(CreateUser(reader));
 
-                    return contacts;
+                    return users;
                 }
             }
-        }*/
+        }
 
         public int Insert(User user)
         {
             if (user == null)
                 throw new ArgumentNullException("user", "Valid user is mandatory!");
 
-            using (SqlCommand command = new SqlCommand("INSERT INTO Users (Name, UserName, Password, Email, DateOfBirth, DateJoined) " +
-                                                       "VALUES (@Name, @UserName, @Password, @Email ,@DateOfBirth ,@DateJoined)" +
-                                                       "SELECT CAST(SCOPE_IDENTITY() AS int)", connection))
+            using (SqlCommand command = new SqlCommand("EXEC UserInsert @Name, @UserName ,@Password ,@Email ,@DateOfBirth ,@DateJoined ", connection))
             {
                 command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = user.Name;
                 command.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = user.UserName;
@@ -82,31 +81,31 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        /*public void Update(Contact contact)
+        public void Update(User user)
         {
-            if (contact == null)
-                throw new ArgumentNullException("contact", "Valid contact is mandatory!");
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
 
-            using (SqlCommand command = new SqlCommand("UPDATE Contacts " +
-                                                       "SET Name = @Name, Picture=@Picture, DateOfBirth=@DateOfBirth " +
-                                                       "WHERE Id = @Id", connection))
+            using (SqlCommand command = new SqlCommand("EXEC UserUpdate @Id, @Name, @Username, @Password, @Email, @DateOfBirth, @DateJoined", connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
-                command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = contact.Name;
-                command.Parameters.Add("@Picture", SqlDbType.Image).Value = contact.Picture.Optional();
-                command.Parameters.Add("@DateOfBirth", SqlDbType.Date).Value = contact.DateOfBirth.Optional();
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
+                command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = user.Name;
+                command.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = user.UserName;
+                command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = user.Password;
+                command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = user.Email;
+                command.Parameters.Add("@DateOfBirth", SqlDbType.Date).Value = user.DateOfBirth.Optional();
+                command.Parameters.Add("@DateJoined", SqlDbType.Date).Value = user.DateJoined;
 
                 command.ExecuteNonQuery();
             }
-        }*/
+        }
 
         public void Delete(User user)
         {
             if (user == null)
                 throw new ArgumentNullException("user", "Valid user is mandatory!");
 
-            using (SqlCommand command = new SqlCommand("DELETE FROM Users " +
-                                                       "WHERE Id = @Id ", connection))
+            using (SqlCommand command = new SqlCommand("EXEC UserDelete @Id ", connection))
             {
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
                 command.ExecuteNonQuery();
@@ -116,8 +115,6 @@ namespace Library.DataAccessLayer.DBAccess
         private User CreateUser(IDataReader reader)
         {
             return new User((int)reader["Id"], reader["Name"] as string, reader["UserName"] as string, reader["Password"] as string, reader["Email"] as string, reader["DateOfBirth"].DBNullTo<DateTime?>(), (DateTime)reader["DateJoined"]);
-
-
         }
 
     }
