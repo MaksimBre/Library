@@ -1,0 +1,13 @@
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.ConsoleClient.exe.config
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.ConsoleClient.exe
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.ConsoleClient.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.DBAccess.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.Models.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.DBAccess.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.DBAccess.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.Models.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\bin\Debug\Library.DataAccessLayer.Models.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\obj\Debug\ConsoleClient.csprojResolveAssemblyReference.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\obj\Debug\ConsoleClient.csproj.CoreCompileInputs.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\obj\Debug\Library.DataAccessLayer.ConsoleClient.exe
+C:\Users\Morsus\Documents\GIT\Library\Library\ConsoleClient\obj\Debug\Library.DataAccessLayer.ConsoleClient.pdb
