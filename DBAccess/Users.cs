@@ -129,6 +129,23 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
+        public void DeleteUserRole(User user, Role role)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
+
+            if (role == null)
+                throw new ArgumentNullException("role", "Valid role is mandatory!");
+
+            using (SqlCommand command = new SqlCommand("EXEC UserDeleteUserRole @UserId, @RoleId ", connection))
+            {
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
+                command.Parameters.Add("@RoleId", SqlDbType.Int).Value = role.Id;
+
+                command.ExecuteNonQuery();
+            }
+        }
+
         public void InsertBookRentals(User user, Book book, DateTime returnDate) {
             if (user == null)
                 throw new ArgumentNullException("user", "Valid user is mandatory!");
@@ -142,6 +159,23 @@ namespace Library.DataAccessLayer.DBAccess
                 command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
                 command.Parameters.Add("@RentalDate", SqlDbType.Date).Value = DateTime.Now;
                 command.Parameters.Add("@ReturnDate", SqlDbType.Date).Value = returnDate;
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteBookRentals(User user, Book book)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
+
+            if (book == null)
+                throw new ArgumentNullException("book", "Valid book is mandatory!");
+
+            using (SqlCommand command = new SqlCommand("EXEC UserDeleteBookRentals @UserId, @BookId ", connection))
+            {
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
+                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
 
                 command.ExecuteNonQuery();
             }

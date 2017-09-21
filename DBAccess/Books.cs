@@ -145,6 +145,23 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
+        public void DeleteBookGenre(Book book, Genre genre)
+        {
+            if (book == null)
+                throw new ArgumentNullException("book", "Valid book is mandatory!");
+
+            if (genre == null)
+                throw new ArgumentNullException("genre", "Valid genre is mandatory!");
+
+            using (SqlCommand command = new SqlCommand("EXEC BookDeleteBookGenre @BookId, @GenreId ", connection))
+            {
+                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
+                command.Parameters.Add("@GenreId", SqlDbType.Int).Value = genre.Id;
+
+                command.ExecuteScalar();
+            }
+        }
+
         public IEnumerable<Book> GetBookRentalsByUser(User user)
         {
             using (SqlCommand command = new SqlCommand("EXEC BookGetRentalsByUser @Id", connection))
