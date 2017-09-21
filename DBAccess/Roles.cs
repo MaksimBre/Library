@@ -46,6 +46,23 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
+        public IEnumerable<Role> RoleGetAllByUser(User user)
+        {
+            using (SqlCommand command = new SqlCommand("EXEC RoleGetAllByUser @Id", connection))
+            {
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    List<Role> roles = new List<Role>();
+                    while (reader.Read())
+                        roles.Add(CreateRole(reader));
+
+                    return roles;
+                }
+            }
+        }
+
         public Role GetByName(string name)
         {
             using (SqlCommand command = new SqlCommand("EXEC RoleGetByName @Name", connection))

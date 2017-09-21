@@ -112,6 +112,23 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
+        public void InsertUserRole(User user, Role role)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
+
+            if (role == null)
+                throw new ArgumentNullException("role", "Valid role is mandatory!");
+
+            using (SqlCommand command = new SqlCommand("EXEC UserInsertUserRole @UserId, @RoleId ", connection))
+            {
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
+                command.Parameters.Add("@RoleId", SqlDbType.Int).Value = role.Id;
+
+                command.ExecuteNonQuery();
+            }
+        }
+
         private User CreateUser(IDataReader reader)
         {
             return new User((int)reader["Id"], reader["Name"] as string, reader["UserName"] as string, reader["Password"] as string, reader["Email"] as string, reader["DateOfBirth"].DBNullTo<DateTime?>(), (DateTime)reader["DateJoined"]);

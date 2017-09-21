@@ -14,7 +14,8 @@ namespace Library.DataAccessLayer.DataSeeder
             using (DBAccess.Library library = new DBAccess.Library(Properties.Settings.Default.LibraryDbConnection))
             {
                 //TableChecker.CheckUserTable(library);
-                TableChecker.CheckRoleTable(library);
+                //TableChecker.CheckRoleTable(library);
+                TableChecker.CheckUserRolesTable(library);
             }
 
         }

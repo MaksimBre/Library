@@ -23,9 +23,12 @@ namespace Library.DataAccessLayer.ConsoleClient
                     Table.Insert(1, user.Id.ToString());
                     Table.Insert(2, user.Name);
                     Table.Insert(3, user.UserName);
-
-
-                    Table.Insert(4, "Role");
+                    Console.Title = user.Id.ToString();
+                    foreach (Role role in library.Roles.RoleGetAllByUser(user))
+                    {
+                        
+                        Table.Insert(4, role.Name);
+                    }
                     Table.Insert(5, user.Email);
                     /*string dateOfBirth = Equals(user.DateOfBirth, null) ? "N/A" : user.DateOfBirth.Value.ToShortDateString();
                     Table.Insert(6, dateOfBirth);*/
