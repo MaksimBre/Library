@@ -129,6 +129,24 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
+        public void InsertBookRentals(User user, Book book, DateTime returnDate) {
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
+
+            if (book == null)
+                throw new ArgumentNullException("book", "Valid book is mandatory!");
+
+            using (SqlCommand command = new SqlCommand("EXEC UserInsertBookRentals @UserId, @BookId, @RentalDate, @ReturnDate ", connection))
+            {
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
+                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
+                command.Parameters.Add("@RentalDate", SqlDbType.Date).Value = DateTime.Now;
+                command.Parameters.Add("@ReturnDate", SqlDbType.Date).Value = returnDate;
+
+                command.ExecuteNonQuery();
+            }
+        }
+
         private User CreateUser(IDataReader reader)
         {
             return new User((int)reader["Id"], reader["Name"] as string, reader["UserName"] as string, reader["Password"] as string, reader["Email"] as string, reader["DateOfBirth"].DBNullTo<DateTime?>(), (DateTime)reader["DateJoined"]);

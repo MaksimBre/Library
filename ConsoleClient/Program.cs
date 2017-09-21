@@ -11,7 +11,13 @@ namespace Library.DataAccessLayer.ConsoleClient
     {
         static void Main(string[] args)
         {
-            Table.Width = 200;
+            //GetAllUsers();
+            //GetAllBooks();
+            GetAllBookRentals();
+        }
+        static void GetAllUsers()
+        {
+            Table.Width = 150;
             Table.Title = "Users";
             Table.ColumnNames = new string[] { "Id", "Name", "User Name", "Role", "Email", "Date joined" };
             Table.Setup();
@@ -26,7 +32,7 @@ namespace Library.DataAccessLayer.ConsoleClient
                     Console.Title = user.Id.ToString();
                     foreach (Role role in library.Roles.RoleGetAllByUser(user))
                     {
-                        
+
                         Table.Insert(4, role.Name);
                     }
                     Table.Insert(5, user.Email);
@@ -35,6 +41,51 @@ namespace Library.DataAccessLayer.ConsoleClient
                     string dateJoined = user.DateJoined.ToShortDateString();
                     Table.Insert(6, dateJoined);
                     Table.NewRow();
+                }
+            }
+        }
+        static void GetAllBooks()
+        {
+            Table.Width = 150;
+            Table.Title = "Books";
+            Table.ColumnNames = new string[] { "Id", "Title", "No Of Pages", "Stock Count", "Writer", "Genre" };
+            Table.Setup();
+
+            using (DBAccess.Library library = new DBAccess.Library(Properties.Settings.Default.LibraryDbConnection))
+            {
+                foreach (Book book in library.Books.GetAll())
+                {
+                    Table.Insert(1, book.Id.ToString());
+                    Table.Insert(2, book.Title);
+                    Table.Insert(3, book.NoOfPages.ToString());
+                    Table.Insert(4, book.StockCount.ToString());
+                    Writer writer = library.Writers.GetById(book.WriterId);
+                    Table.Insert(5, writer.Name);
+                    Genre genre = library.Genres.GetByBookId(book);
+                    Table.Insert(6, genre.Name);
+                }
+            }
+        }
+        static void GetAllBookRentals()
+        {
+            Table.Width = 150;
+            Table.Title = "Book Rentals";
+            Table.ColumnNames = new string[] { "Book Title", "Writer", "User", "Rental Date", "Return Date" };
+            Table.Setup();
+
+            using(DBAccess.Library library = new DBAccess.Library(Properties.Settings.Default.LibraryDbConnection))
+            {
+                foreach (User user in library.Users.GetAll()) {
+                    foreach (Book book in library.Books.GetBookRentalsByUser(user)) {
+                        Table.Insert(1, book.Title);
+                        Writer writer = library.Writers.GetById(book.WriterId);
+                        Table.Insert(2, writer.Name);
+                        Table.Insert(3, user.Name);
+                        DateTime rentalDate = library.Books.GetRentalDate(user, book);
+                        Table.Insert(4, rentalDate.ToShortDateString());
+                        DateTime returnDate = library.Books.GetReturnDate(user, book);
+                        Table.Insert(5, returnDate.ToShortDateString());
+                    }
                 }
             }
         }

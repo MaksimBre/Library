@@ -15,7 +15,9 @@ namespace Library.DataAccessLayer.DataSeeder
             {
                 //TableChecker.CheckUserTable(library);
                 //TableChecker.CheckRoleTable(library);
-                TableChecker.CheckUserRolesTable(library);
+                //TableChecker.CheckUserRolesTable(library);
+                //TableChecker.CheckBookTable(library);
+                TableChecker.CheckRentalTable(library);
             }
 
         }

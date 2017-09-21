@@ -9,12 +9,9 @@ namespace Library.DataAccessLayer.DBAccess
 
         public Users Users { get; set; }
         public Roles Roles { get; set; }
-        /*public Contacts Contacts { get; set; }
-        public Phones Phones { get; set; }
-        public PhoneTypes PhoneTypes { get; set; }
-        public Countries Countries { get; set; }
-        public Addresses Addresses { get; set; }
-        public AddressTypes AddressTypes { get; set; }*/
+        public Books Books { get; set; }
+        public Writers Writers { get; set; }
+        public Genres Genres { get; set; }
 
         public Library(string connectionString)
         {
@@ -26,12 +23,9 @@ namespace Library.DataAccessLayer.DBAccess
 
             Users = new Users(connection);
             Roles = new Roles(connection);
-            /*Contacts = new Contacts(connection);
-            Phones = new Phones(connection);
-            PhoneTypes = new PhoneTypes(connection);
-            Countries = new Countries(connection);
-            Addresses = new Addresses(connection);
-            AddressTypes = new AddressTypes(connection);*/
+            Books = new Books(connection);
+            Writers = new Writers(connection);
+            Genres = new Genres(connection);
         }
 
         public void Dispose()
