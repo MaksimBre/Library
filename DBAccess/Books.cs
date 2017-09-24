@@ -164,6 +164,9 @@ namespace Library.DataAccessLayer.DBAccess
 
         public IEnumerable<Book> GetBookRentalsByUser(User user)
         {
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
+
             using (SqlCommand command = new SqlCommand("EXEC BookGetRentalsByUser @Id", connection))
             {
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
@@ -217,5 +220,6 @@ namespace Library.DataAccessLayer.DBAccess
         {
             return new Book((int)reader["Id"], reader["Title"] as string, (int)reader["NoOfPages"], (int)reader["StockCount"], (int)reader["WriterId"]);
         }
+
     }
 }
