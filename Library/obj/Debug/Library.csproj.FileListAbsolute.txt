@@ -1,7 +1,0 @@
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\bin\Debug\Library.exe.config
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\bin\Debug\Library.exe
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\bin\Debug\Library.pdb
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\obj\Debug\Library.csproj.CoreCompileInputs.cache
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\obj\Debug\Library.exe
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\obj\Debug\Library.pdb
