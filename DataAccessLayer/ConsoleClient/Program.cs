@@ -76,15 +76,16 @@ namespace Library.DataAccessLayer.ConsoleClient
             using(DBAccess.Library library = new DBAccess.Library(Properties.Settings.Default.LibraryDbConnection))
             {
                 foreach (User user in library.Users.GetAll()) {
-                    foreach (Book book in library.Books.GetBookRentalsByUser(user)) {
-                        Table.Insert(1, book.Title);
+                    foreach (BookRental bookRental in library.Books.GetAllBookRentalsByUser(user)) {
+                        Book book = library.Books.GetById(bookRental.BookId);
+                        Table.Insert(1,book.Title);
+
                         Writer writer = library.Writers.GetById(book.WriterId);
                         Table.Insert(2, writer.Name);
+
                         Table.Insert(3, user.Name);
-                        DateTime rentalDate = library.Books.GetRentalDate(user, book);
-                        Table.Insert(4, rentalDate.ToShortDateString());
-                        DateTime returnDate = library.Books.GetReturnDate(user, book);
-                        Table.Insert(5, returnDate.ToShortDateString());
+                        Table.Insert(4, bookRental.RentalDate.ToShortDateString());
+                        Table.Insert(5, bookRental.ReturnDate.ToShortDateString());
                     }
                 }
             }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.DataAccessLayer.Models
 {
@@ -10,7 +6,17 @@ namespace Library.DataAccessLayer.Models
     {
         public BookRental() { }
 
+        public BookRental(int userId, int bookId, DateTime rentalDate, DateTime returnDate)
+        {
+            UserId = userId;
+            BookId = bookId;
+            RentalDate = rentalDate;
+            ReturnDate = returnDate;
+        }
+
+        public int UserId { get; set; }
         public int BookId { get; set; }
-        public int MyProperty { get; set; }
+        public DateTime RentalDate { get; set; }
+        public DateTime ReturnDate { get; set; }
     }
 }

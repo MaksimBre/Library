@@ -162,63 +162,34 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public IEnumerable<Book> GetBookRentalsByUser(User user)
+        public IEnumerable<BookRental> GetAllBookRentalsByUser(User user)
         {
             if (user == null)
                 throw new ArgumentNullException("user", "Valid user is mandatory!");
 
-            using (SqlCommand command = new SqlCommand("EXEC BookGetRentalsByUser @Id", connection))
+            using (SqlCommand command = new SqlCommand("EXEC BookGetAllRentalsByUser @Id", connection))
             {
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    List<Book> books = new List<Book>();
+                    List<BookRental> bookRentals = new List<BookRental>();
                     while (reader.Read())
-                        books.Add(CreateBook(reader));
+                        bookRentals.Add(CreateBookRental(reader));
 
-                    return books;
+                    return bookRentals;
                 }
-            }
-        }
-
-        public DateTime GetRentalDate(User user, Book book)
-        {
-            if (user == null)
-                throw new ArgumentNullException("user", "Valid user is mandatory!");
-
-            if (book == null)
-                throw new ArgumentNullException("book", "Valid book is mandatory!");
-
-            using (SqlCommand command = new SqlCommand("EXEC BookGetRentalDate @UserId, @BookId ", connection))
-            {
-                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
-                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
-
-                return (DateTime)command.ExecuteScalar();
-            }
-        }
-
-        public DateTime GetReturnDate(User user, Book book)
-        {
-            if (user == null)
-                throw new ArgumentNullException("user", "Valid user is mandatory!");
-
-            if (book == null)
-                throw new ArgumentNullException("book", "Valid book is mandatory!");
-
-            using (SqlCommand command = new SqlCommand("EXEC BookGetReturnDate @UserId, @BookId ", connection))
-            {
-                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
-                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
-
-                return (DateTime)command.ExecuteScalar();
             }
         }
 
         private Book CreateBook(IDataReader reader)
         {
             return new Book((int)reader["Id"], reader["Title"] as string, (int)reader["NoOfPages"], (int)reader["StockCount"], (int)reader["WriterId"]);
+        }
+
+        private BookRental CreateBookRental(IDataReader reader)
+        {
+            return new BookRental((int)reader["UserId"], (int)reader["BookId"], (DateTime)reader["RentalDate"], (DateTime)reader["ReturnDate"]);
         }
 
     }

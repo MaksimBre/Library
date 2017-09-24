@@ -12,3 +12,10 @@ D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Models.csprojResolveAss
 D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
 D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Library.DataAccessLayer.Models.dll
 D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Library.DataAccessLayer.Models.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\Models\bin\Debug\Library.DataAccessLayer.Models.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\Models\bin\Debug\Library.DataAccessLayer.Models.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\Models\bin\Debug\Library.DataAccessLayer.Models.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\Models\obj\Debug\Library.DataAccessLayer.Models.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\Models\obj\Debug\Library.DataAccessLayer.Models.pdb

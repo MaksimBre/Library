@@ -26,7 +26,7 @@ namespace Library.DataAccessLayer.DataSeeder.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TOSHIBA-PC;Initial Catalog=LibraryDB;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-39LUGD9;Initial Catalog=LibraryDB;Integrated Security=True")]
         public string LibraryDbConnection {
             get {
                 return ((string)(this["LibraryDbConnection"]));
