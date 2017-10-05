@@ -18,13 +18,3 @@ D:\Max\Projects\Library\DataAccessLayer\DBAccess\obj\Debug\DBAccess.csprojResolv
 D:\Max\Projects\Library\DataAccessLayer\DBAccess\obj\Debug\DBAccess.csproj.CoreCompileInputs.cache
 D:\Max\Projects\Library\DataAccessLayer\DBAccess\obj\Debug\Library.DataAccessLayer.DBAccess.dll
 D:\Max\Projects\Library\DataAccessLayer\DBAccess\obj\Debug\Library.DataAccessLayer.DBAccess.pdb
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\bin\Debug\Library.DataAccessLayer.DBAccess.dll.config
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\bin\Debug\Library.DataAccessLayer.DBAccess.dll
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\bin\Debug\Library.DataAccessLayer.DBAccess.pdb
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\bin\Debug\Library.DataAccessLayer.Models.dll
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\bin\Debug\Library.DataAccessLayer.Models.pdb
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\bin\Debug\Library.DataAccessLayer.Models.dll.config
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\obj\Debug\DBAccess.csprojResolveAssemblyReference.cache
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\obj\Debug\DBAccess.csproj.CoreCompileInputs.cache
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\obj\Debug\Library.DataAccessLayer.DBAccess.dll
-C:\Users\Morsus\Documents\GIT\Library\Library\Library\DataAccessLayer\DBAccess\obj\Debug\Library.DataAccessLayer.DBAccess.pdb

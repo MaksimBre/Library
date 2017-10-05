@@ -6,15 +6,15 @@ namespace Library.DataAccessLayer.Models
     {
         public User() { }
 
-        public User(int id, string name, string username, string password, string email, DateTime? dob, DateTime dj)
+        public User(int id, string name, string userName, string password, string email, DateTime dateJoined, DateTime? dateOfBirth)
         {
             Id = id;
             Name = name;
-            UserName = username;
+            UserName = userName;
             Password = password;
             Email = email;
-            DateOfBirth = dob;
-            DateJoined = dj;
+            DateOfBirth = dateOfBirth;
+            DateJoined = dateJoined;
         }
 
         public int Id { get; set; }
