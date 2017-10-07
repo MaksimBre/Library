@@ -183,7 +183,7 @@ namespace Library.DataAccessLayer.DBAccess
 
         private User CreateUser(IDataReader reader)
         {
-            return new User((int)reader["Id"], reader["Name"] as string, reader["UserName"] as string, reader["Password"] as string, reader["Email"] as string, reader["DateOfBirth"].DBNullTo<DateTime?>(), (DateTime)reader["DateJoined"]);
+            return new User((int)reader["Id"], reader["Name"] as string, reader["UserName"] as string, reader["Password"] as string, reader["Email"] as string, reader["DateOfBirth"].DBNullTo<DateTime>(), (DateTime)reader["DateJoined"]);
         }
 
     }

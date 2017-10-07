@@ -8,7 +8,6 @@ C:\Users\Morsus\Documents\GIT\Library\Library\Models\obj\Debug\Library.DataAcces
 D:\Max\Projects\Library\DataAccessLayer\Models\bin\Debug\Library.DataAccessLayer.Models.dll.config
 D:\Max\Projects\Library\DataAccessLayer\Models\bin\Debug\Library.DataAccessLayer.Models.dll
 D:\Max\Projects\Library\DataAccessLayer\Models\bin\Debug\Library.DataAccessLayer.Models.pdb
-D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
 D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
 D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Library.DataAccessLayer.Models.dll
 D:\Max\Projects\Library\DataAccessLayer\Models\obj\Debug\Library.DataAccessLayer.Models.pdb

@@ -21,7 +21,7 @@ namespace Library.BusinessLogicLayer.Managers
             if (dbUser == null)
                 return null;
 
-            User user = new User(dbUser.Name, dbUser.UserName, dbUser.Password, dbUser.Email, dbUser.DateOfBirth, dbUser.DateJoined);
+            User user = new User(dbUser.Name, dbUser.UserName, dbUser.Password, dbUser.Email, dbUser.DateJoined, dbUser.DateOfBirth);
             user.Id = dbUser.Id;
 
             return user;
