@@ -16,13 +16,47 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
+        public User GetById(int id)
+        {
+            using(DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                return Map(library.Users.GetById(id));
+            }
+        }
+
+        public int Add(User user)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                return library.Users.Insert(Map(user));
+            }
+        }
+
+        public void Save(User user)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                library.Users.Update(Map(user));
+            }
+        }
+
+        public void Delete (User user)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                library.Users.Delete(Map(user));
+            }
+        }
+
         private User Map(DataAccessLayer.Models.User dbUser)
         {
             if (dbUser == null)
                 return null;
 
-            User user = new User(dbUser.Name, dbUser.UserName, dbUser.Password, dbUser.Email, dbUser.DateJoined, dbUser.DateOfBirth);
-            user.Id = dbUser.Id;
+            User user = new User(dbUser.Name, dbUser.UserName, dbUser.Password, dbUser.Email, dbUser.DateJoined, dbUser.DateOfBirth)
+            {
+                Id = dbUser.Id
+            };
 
             return user;
         }

@@ -33,7 +33,6 @@ namespace Library.BusinessLogicLayer.Models
                 catch
                 {
                     name = oldValue;
-                    //throw;
                 }
             }
         }
@@ -59,7 +58,6 @@ namespace Library.BusinessLogicLayer.Models
                 catch
                 {
                     userName = oldValue;
-                    //throw;
                 }
             }
         }
@@ -85,7 +83,6 @@ namespace Library.BusinessLogicLayer.Models
                 catch
                 {
                     password = oldValue;
-                    //throw;
                 }
             }
         }
@@ -111,7 +108,6 @@ namespace Library.BusinessLogicLayer.Models
                 catch
                 {
                     email = oldValue;
-                    //throw;
                 }
             }
         }
@@ -137,7 +133,6 @@ namespace Library.BusinessLogicLayer.Models
                 catch
                 {
                     dateJoined = oldValue;
-                    //throw;
                 }
             }
         }
