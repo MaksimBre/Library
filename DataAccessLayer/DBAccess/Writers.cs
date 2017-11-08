@@ -94,14 +94,11 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public void Delete(Writer writer)
+        public void Delete(int id)
         {
-            if (writer == null)
-                throw new ArgumentNullException("writer", "Valid writer is mandatory!");
-
             using (SqlCommand command = new SqlCommand("EXEC WriterDelete @Id ", connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = writer.Id;
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
                 command.ExecuteNonQuery();
             }
         }

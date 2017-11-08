@@ -1,0 +1,16 @@
+﻿@model Library.PresentationLayer.Web.Models.GenreModel
+
+@using (Html.BeginForm("GenreEdit", "Book", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="lib-writer-table-row">
+        @Html.HiddenFor(model => model.Id)
+        <div>@Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
+        <div class="lib-genre-controls">
+            <input type="submit" value="Save" class="btn btn-success btn-xs" />
+            @Html.ActionLink("Delete", "GenreDelete", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs delete-button" })
+        </div>
+    </div>
+
+
+}

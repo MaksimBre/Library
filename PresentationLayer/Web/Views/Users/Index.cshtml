@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Library.PresentationLayer.Web.Models.UserModel>
+
+<h2>Manage users and roles</h2>
+
+<div class="lib-writer-new-table">
+    <div class="lib-writer-table-header">
+        <div>Display name</div>
+        <div>Username</div>
+        <div>Date of birthday</div>
+        <div>Date joined</div>
+        <div>Controls</div>
+    </div>
+    <div class="lib-writer-table-container">
+        @foreach (var item in Model)
+        {
+            Html.RenderPartial("_PartialUser", item);
+        }
+    </div>
+</div>
+@Html.ActionLink("Back to index", "Index", "Home", null, new { @class = "btn btn-primary btn-block" })

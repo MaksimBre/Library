@@ -1,0 +1,16 @@
+﻿@model Library.PresentationLayer.Web.Models.WriterModel
+
+@using (Html.BeginForm("Save", "Writer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="lib-writer-table-row">
+        @Html.HiddenFor(model => Model.Id)
+        <div class="lib-writer-name">@Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "lib-transparent-input" } })</div>
+        <div>@Html.EditorFor(model => Model.Biography, new { htmlAttributes = new { @class = "lib-transparent-text", rows = 5 } })</div>
+        <div class="lib-writer-nob">@Html.EditorFor(model => Model.NoOfBooks, new { htmlAttributes = new { @class = "lib-transparent-input" } })</div>
+        <div class="lib-writer-controls">
+            <input type="submit" value="Save" class="btn btn-info btn-xs">
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs delete-button" })
+        </div>
+    </div>
+}

@@ -1,0 +1,30 @@
+﻿@model Library.PresentationLayer.Web.Models.UserModel
+
+<h2>Edit roles for user @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="col-md-offset-2 col-md-10">
+            @Html.HiddenFor(model => model.Id)
+
+            @foreach (var role in Model.RoleList2)
+            {
+                <div class="lib-user-role-edit">
+                    @Html.Label(role.Name, new { @class = "lib-checkbox-label" })
+                    @Html.CheckBox(role.Id.ToString(), role.IsChecked, new { @class = "lib-checkbox" })
+                </div>
+            }
+            @Html.HiddenFor(model => model.RoleList)
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-success btn-block" />
+                    @Html.ActionLink("Back", "Index", "Users", null, new { @class = "btn btn-primary btn-block max280" })
+                </div>
+            </div>
+        </div>
+}

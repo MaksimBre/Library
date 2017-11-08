@@ -45,7 +45,41 @@ namespace Library.DataAccessLayer.DBAccess
                 }
             }
         }
-        
+
+        public User GetByLogin(User user)
+        {
+            using (SqlCommand command = new SqlCommand("EXEC UserGetByLogin @username, @email, @password", connection))
+            {
+                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = user.UserName;
+                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = user.Email;
+                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = user.Password;
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        return CreateUser(reader);
+
+                    return null;
+                }
+            }
+        }
+
+        public User GetByEmail(string email)
+        {
+            using (SqlCommand command = new SqlCommand("EXEC UserGetByEmail @email", connection))
+            {
+                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        return CreateUser(reader);
+
+                    return null;
+                }
+            }
+        }
+
         public IEnumerable<User> Search(string name)
         {
             using (SqlCommand command = new SqlCommand("EXEC UserSearch @Name ", connection))
@@ -76,8 +110,8 @@ namespace Library.DataAccessLayer.DBAccess
                 command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = user.Email;
                 command.Parameters.Add("@DateOfBirth", SqlDbType.Date).Value = user.DateOfBirth.Optional();
                 command.Parameters.Add("@DateJoined", SqlDbType.Date).Value = user.DateJoined;
-
-                return (int)command.ExecuteScalar();
+                var result = command.ExecuteScalar();
+                return (int)result;
             }
         }
 
@@ -100,14 +134,11 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public void Delete(User user)
+        public void Delete(int id)
         {
-            if (user == null)
-                throw new ArgumentNullException("user", "Valid user is mandatory!");
-
             using (SqlCommand command = new SqlCommand("EXEC UserDelete @Id ", connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
                 command.ExecuteNonQuery();
             }
         }
@@ -141,6 +172,19 @@ namespace Library.DataAccessLayer.DBAccess
             {
                 command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
                 command.Parameters.Add("@RoleId", SqlDbType.Int).Value = role.Id;
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteAllUserRoles(User user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
+
+            using (SqlCommand command = new SqlCommand("EXEC UserDeleteAllUserRoles @UserId", connection))
+            {
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
 
                 command.ExecuteNonQuery();
             }
@@ -181,10 +225,34 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        private User CreateUser(IDataReader reader)
+        public IEnumerable<BookRental> GetAllBookRentalsByUser(User user)
         {
-            return new User((int)reader["Id"], reader["Name"] as string, reader["UserName"] as string, reader["Password"] as string, reader["Email"] as string, reader["DateOfBirth"].DBNullTo<DateTime>(), (DateTime)reader["DateJoined"]);
+            if (user == null)
+                throw new ArgumentNullException("user", "Valid user is mandatory!");
+
+            using (SqlCommand command = new SqlCommand("EXEC BookGetAllRentalsByUser @Id", connection))
+            {
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    List<BookRental> bookRentals = new List<BookRental>();
+                    while (reader.Read())
+                        bookRentals.Add(CreateBookRental(reader));
+
+                    return bookRentals;
+                }
+            }
         }
 
+        private User CreateUser(IDataReader reader)
+        {
+            return new User((int)reader["Id"], reader["Name"] as string, reader["UserName"] as string, reader["Password"] as string, reader["Email"] as string, (DateTime)reader["DateJoined"], reader["DateOfBirth"].DBNullTo<DateTime?>());
+        }
+
+        private BookRental CreateBookRental(IDataReader reader)
+        {
+            return new BookRental((int)reader["UserId"], (int)reader["BookId"], (DateTime)reader["RentalDate"], (DateTime)reader["ReturnDate"]);
+        }
     }
 }

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Library.PresentationLayer.Web.Models.BookModel>
+@using Library.PresentationLayer.Web.Helpers;
+
+<form method="get" action="@Url.Action("Index", "Home")">
+    <div class="lib-search-container">
+        <input type="text" name="search" id="search" class="form-control lib-search" placeholder="search..." />
+        <button type="submit" class="btn btn-success btn-xs lib-search-button float-left">Search</button>
+        @Html.ActionLink("Clear", "Index", "Home", null, new { @class = "btn btn-info btn-xs lib-search-button float-right" })
+    </div>
+    <button type="submit" style="display:none;">Search</button>
+</form>
+
+@if (TempData.ContainsKey("BookRental"))
+{
+    <div class="alert alert-info">
+        @{
+            string[] rentalInfo = TempData["BookRental"].ToString().Split('&');
+            @Html.Raw("<b>Book rented: </b>" + "User " + rentalInfo[0] + " rented " + rentalInfo[1] + " - <b>Return date: </b>" + rentalInfo[2])
+        }
+    </div>
+            }
+
+<div class="lib-writer-new-table">
+    <div class="lib-writer-table-header">
+        <div>Title</div>
+        @if (Request.IsAuthenticated && UserIdentity.IsInRole("Administrator"))
+        {
+            <div class="p10">Number of pages</div>
+            <div class="p10">Stock count</div>
+
+        }
+        <div>Number of pages</div>
+        <div>Stock count</div>
+        <div>Writers name</div>
+        <div>Genre</div>
+        @if (Request.IsAuthenticated && UserIdentity.IsInRole("User,Librarian"))
+        {
+            <div class="lib-rent">Controls</div>
+        }
+        else if (Request.IsAuthenticated && UserIdentity.IsInRole("Administrator"))
+        {
+            <div>Controls</div>
+        }
+    </div>
+    <div class="lib-writer-table-container">
+        @if (Request.IsAuthenticated && UserIdentity.IsInRole("Administrator"))
+        {
+            foreach (var item in Model)
+            {
+                Html.RenderPartial("_PartialBookAdmin", item);
+            }
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                Html.RenderPartial("_PartialBookUser", item);
+            }
+        }
+    </div>
+</div>
+@if (Request.IsAuthenticated && UserIdentity.IsInRole("Librarian,Administrator"))
+{
+    @Html.ActionLink("Add book", "Create", "Book", null, new { @class = "btn btn-block btn-primary" })
+}

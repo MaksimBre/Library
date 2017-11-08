@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Library.PresentationLayer.Web.Models.BookRentalModel>
+
+<h2>Manage users and roles</h2>
+
+<div class="lib-writer-new-table">
+    <div class="lib-writer-table-header">
+        <div>Book title</div>
+        <div>Writer name</div>
+        <div>Rental date</div>
+        <div>Return date</div>
+    </div>
+    <div class="lib-writer-table-container">
+        @foreach (var item in Model)
+        {
+            Html.RenderPartial("_PartialRentals", item);
+        }
+    </div>
+</div>
+@Html.ActionLink("Back to index", "Index", "Home", null, new { @class = "btn btn-primary btn-block" })

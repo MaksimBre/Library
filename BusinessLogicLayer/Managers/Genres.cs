@@ -24,6 +24,14 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
+        public IEnumerable<Genre> GetByBookId(int id)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                return library.Genres.GetByBookId(id).Select(genre => Map(genre));
+            }
+        }
+
         public int Add(Genre genre)
         {
             using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
@@ -40,11 +48,11 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
-        public void Delete(Genre genre)
+        public void Delete(int id)
         {
             using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
             {
-                library.Genres.Delete(Map(genre));
+                library.Genres.Delete(id);
             }
         }
 

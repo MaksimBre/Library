@@ -1,0 +1,34 @@
+﻿@model Library.PresentationLayer.Web.Models.UserModel
+@using Library.PresentationLayer.Web.Helpers
+
+@using (Html.BeginForm("Save", "Users", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="lib-writer-table-row">
+        @Html.HiddenFor(model => Model.Id)
+        <div>@Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "lib-transparent-input" } }) @Html.ValidationMessageFor(model => model.Name, "", new { @class = "lib-error-message2" })</div>
+        <div>@Html.EditorFor(model => Model.UserName, new { htmlAttributes = new { @class = "lib-transparent-input" } }) @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "lib-error-message2" })</div>
+        <div>@Html.EditorFor(model => Model.DateOfBirth, new { htmlAttributes = new { @class = "lib-transparent-input" } }) @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "lib-error-message2" })</div>
+        <div>@Html.DisplayFor(model => Model.DateJoined, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
+        <div>
+            
+            @if (UserIdentity.UserName() == Model.UserName && UserIdentity.Email() == Model.Email)
+            {   
+                <input type="submit" value="Save" class="btn btn-info btn-xs disabled">
+
+                @Html.ActionLink("Edit roles", "EditRole", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs disabled" }) 
+
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs delete-button disabled" })
+            }
+            else
+            {
+                <input type="submit" value="Save" class="btn btn-info btn-xs">
+
+                @Html.ActionLink("Edit roles", "EditRole", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" }) 
+
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs delete-button" })
+            }
+            
+        </div>
+    </div>
+}

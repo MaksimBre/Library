@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Library.DataAccessLayer.Models;
 
 namespace Library.DataAccessLayer.ConsoleClient
@@ -11,10 +9,11 @@ namespace Library.DataAccessLayer.ConsoleClient
     {
         static void Main(string[] args)
         {
-            //GetAllUsers();
+            GetAllUsers();
             //GetAllBooks();
-            GetAllBookRentals();
+            //GetAllBookRentals();
         }
+
         static void GetAllUsers()
         {
             Table.Width = 150;
@@ -30,7 +29,7 @@ namespace Library.DataAccessLayer.ConsoleClient
                     Table.Insert(2, user.Name);
                     Table.Insert(3, user.UserName);
                     Console.Title = user.Id.ToString();
-                    foreach (Role role in library.Roles.RoleGetAllByUser(user))
+                    foreach (Role role in library.Roles.RolesGetByUser(user))
                     {
 
                         Table.Insert(4, role.Name);
@@ -61,8 +60,8 @@ namespace Library.DataAccessLayer.ConsoleClient
                     Table.Insert(4, book.StockCount.ToString());
                     Writer writer = library.Writers.GetById(book.WriterId);
                     Table.Insert(5, writer.Name);
-                    Genre genre = library.Genres.GetByBookId(book);
-                    Table.Insert(6, genre.Name);
+                    IEnumerable<Genre> genre = library.Genres.GetByBookId(book.Id);
+                    Table.Insert(6, genre.First().Name);
                 }
             }
         }

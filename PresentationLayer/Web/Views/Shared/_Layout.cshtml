@@ -1,0 +1,83 @@
+﻿@using Library.PresentationLayer.Web.Helpers;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Library", "Index", "Home", new { area = "" }, new { @class = "lib-menuitem float-left home" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="lib-menulist">
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (UserIdentity.IsInRole("Administrator"))
+                        {
+                            @Html.Partial("Menu/_Admin")
+                        }
+                        else if (UserIdentity.IsInRole("Librarian"))
+                        {
+                            @Html.Partial("Menu/_Librarian")
+                        }
+                        else if (UserIdentity.IsInRole("User"))
+                        {
+                            @Html.Partial("Menu/_User")
+                        }else{
+                            @Html.Partial("Menu/_Guest")
+                        }
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Dragan Ilić Mors &hearts;</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("form input:checkbox").change(function () {
+                var values = "";
+                $("form input:checkbox:checked").each(function () {
+                    values += $(this).attr("name")+"/";
+                });
+                $("#GenresList").val(values);
+                $("#RoleList").val(values);
+            });
+
+            $(function () {
+                $('.delete-button').click(function () {
+                    return confirm("Are you sure you want to delete?");
+                });
+            });
+
+            $(function () {
+                $('.rent-button').click(function () {
+                    return confirm("Are you sure you want to rent?");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

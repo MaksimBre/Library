@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Library.PresentationLayer.Web.Models.GenreModel>
+@using Library.PresentationLayer.Web.Models
+
+<h2>Add a new genre</h2>
+
+@Html.Partial("_PartialCreateGenre", new GenreModel())
+
+<h2>Edit existing genres</h2>
+<hr />
+<div class="lib-writer-new-table lib-genre-table">
+    <div class="lib-writer-table-header">
+        <div>Genre name</div>
+        <div class="lib-genre-controls">Controls</div>
+    </div>
+    <div class="lib-writer-table-container">
+        @foreach (var item in Model)
+            {
+                Html.RenderPartial("_PartialGenreEdit", item);
+            }
+    </div>
+</div>

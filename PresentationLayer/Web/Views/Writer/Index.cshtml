@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Library.PresentationLayer.Web.Models.WriterModel>
+<h2>List of writers</h2>
+<div class="lib-writer-new-table">
+    <div class="lib-writer-table-header">
+        <div class="lib-writer-name">Writers name</div>
+        <div>Biography</div>
+        <div class="lib-writer-nob">No of books</div>
+    </div>
+    <div class="lib-writer-table-container">
+        @foreach (var item in Model)
+            {
+            <div class="lib-writer-table-row">
+                <div class="lib-writer-name">@Html.DisplayFor(modelItem => item.Name)</div>
+                <div>@Html.DisplayFor(modelItem => item.Biography)</div>
+                <div class="lib-writer-nob">@Html.DisplayFor(modelItem => item.NoOfBooks)</div>
+            </div>
+        }
+    </div>
+</div>
+

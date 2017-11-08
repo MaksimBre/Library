@@ -46,9 +46,9 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public IEnumerable<Role> RoleGetAllByUser(User user)
+        public IEnumerable<Role> RolesGetByUser(User user)
         {
-            using (SqlCommand command = new SqlCommand("EXEC RoleGetAllByUser @Id", connection))
+            using (SqlCommand command = new SqlCommand("EXEC RoleGetByUser @Id", connection))
             {
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
 
@@ -67,7 +67,7 @@ namespace Library.DataAccessLayer.DBAccess
         {
             using (SqlCommand command = new SqlCommand("EXEC RoleGetByName @Name", connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = name;
+                command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = name;
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

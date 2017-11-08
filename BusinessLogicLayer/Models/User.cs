@@ -9,7 +9,15 @@ namespace Library.BusinessLogicLayer.Models
         private DateTime dateJoined;
 
         public User() { }
-        public User(string name, string userName, string password, string email, DateTime dateJoined, DateTime? dateOfBirth) { }
+        public User(string name, string userName, string password, string email, DateTime dateJoined, DateTime? dateOfBirth = null)
+        {
+            Name = name;
+            UserName = userName;
+            Password = password;
+            Email = email;
+            DateOfBirth = dateOfBirth;
+            DateJoined = dateJoined;
+        }
 
         public int Id { get; set; }
         public string Name

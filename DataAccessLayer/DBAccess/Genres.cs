@@ -49,18 +49,19 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public Genre GetByBookId(Book book)
+        public IEnumerable<Genre> GetByBookId(int id)
         {
-            using (SqlCommand command = new SqlCommand("EXEC GenreGetByBookId @Id", connection))
+            using (SqlCommand command = new SqlCommand("EXEC GenreGetAllByBookId @Id", connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = book.Id;
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    if (reader.Read())
-                        return CreateGenre(reader);
+                    List<Genre> genres = new List<Genre>();
+                    while (reader.Read())
+                        genres.Add(CreateGenre(reader));
 
-                    return null;
+                    return genres;
                 }
             }
         }
@@ -110,14 +111,11 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public void Delete(Genre genre)
+        public void Delete(int id)
         {
-            if (genre == null)
-                throw new ArgumentNullException("genre", "Valid genre is mandatory!");
-
             using (SqlCommand command = new SqlCommand("EXEC GenreDelete @Id ", connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = genre.Id;
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
                 command.ExecuteNonQuery();
             }
         }

@@ -40,11 +40,11 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
-        public void Delete(Writer writer)
+        public void Delete(int id)
         {
             using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
             {
-                library.Writers.Delete(Map(writer));
+                library.Writers.Delete(id);
             }
         }
 

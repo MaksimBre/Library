@@ -1,0 +1,15 @@
+﻿@model Library.PresentationLayer.Web.Models.BookRentalModel
+@using Library.PresentationLayer.Web.Models
+@using Library.BusinessLogicLayer.Managers
+
+<div class="lib-writer-table-row">
+    @{ 
+        Books BookManager = new Books();
+        BookModel book = BookManager.GetById(Model.BookId);
+
+    <div>@book.Title</div>
+    <div>@book.Writer.Name</div>
+    <div>@Model.RentalDate.ToShortDateString() </div>
+    <div>@Model.ReturnDate.ToShortDateString()</div>
+        }
+</div>

@@ -1,0 +1,77 @@
+﻿@model Library.PresentationLayer.Web.Models.BookModel
+@using Library.BusinessLogicLayer.Managers;
+@using Library.PresentationLayer.Web.Models;
+
+@using (Html.BeginForm("Create", "Book", FormMethod.Post, new { @class = "form-horizontal", role = "form", novalidate = "novalidate" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Add a new book</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "lib-error-message" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NoOfPages, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NoOfPages, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoOfPages, "", new { @class = "lib-error-message" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StockCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StockCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StockCount, "", new { @class = "lib-error-message" })
+            </div>
+        </div>
+
+        @{
+            Writers WriterManager = new Writers();
+            IEnumerable<WriterModel> writers = WriterManager.GetAll().Select(x => (WriterModel)x);
+            var writersList = new SelectList(writers, "Id", "Name");
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Writer.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Writer.Id, writersList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        @{
+            Genres GenreManager = new Genres();
+            IEnumerable<GenreModel> genres = GenreManager.GetAll().Select(x => (GenreModel)x);
+        }
+        <div class="form-group">
+            @Html.Label("Genre/s", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="lib-checkbox-container">
+                    @foreach (GenreModel genre in genres)
+                    {
+                        <div class="lib-checkbox-group">
+                            @Html.Label(genre.Name, new { @class = "lib-checkbox-label" })
+                            @Html.CheckBox(genre.Id.ToString(), false, new { @class = "lib-checkbox" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.GenresList)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success btn-block" />
+                @Html.ActionLink("Genre manager", "GenreEdit", "Book", null, new { @class = "btn btn-info btn-block max280" })
+                @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-primary btn-block max280" })
+            </div>
+        </div>
+    </div>
+}

@@ -137,7 +137,7 @@ namespace Library.DataAccessLayer.DataSeeder
                 WriterId = writer1.Id
             };
             book1.Id = library.Books.Insert(book1);
-            library.Books.InsertBookGenre(book1,genre1);
+            library.Books.InsertBookGenre(book1.Id,genre1.Id);
         }
 
         public static void CheckRentalTable(DBAccess.Library library)

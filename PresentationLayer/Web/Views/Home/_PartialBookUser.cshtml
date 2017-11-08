@@ -1,0 +1,39 @@
+﻿@model Library.PresentationLayer.Web.Models.BookModel
+@using Library.PresentationLayer.Web.Models
+@using Library.BusinessLogicLayer.Managers
+@using Library.PresentationLayer.Web.Helpers
+
+    @using (Html.BeginForm("Save", "Book", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="lib-writer-table-row">
+            @Html.HiddenFor(model => Model.Id)
+            <div>@Html.DisplayFor(model => Model.Title, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
+            <div>@Html.DisplayFor(model => Model.NoOfPages, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
+            <div>@Html.DisplayFor(model => Model.StockCount, new { htmlAttributes = new { @class = "lib-transparent-input" } })</div>
+            <div>@Html.DisplayFor(model => Model.Writer.Name, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
+            <div>
+                @{
+                    Genres GenreManager = new Genres();
+                    IEnumerable<GenreModel> genres = GenreManager.GetByBookId(Model.Id).Select(x => (GenreModel)x);
+                    int count = genres.Count() - 1;
+                    int i = 0;
+                    foreach (GenreModel genre in genres)
+                    {
+                        @Html.Raw(genre.Name)
+                        if (i != count)
+                        {
+                            @Html.Raw(", ")
+                        }
+                        i++;
+                    }
+                }
+            </div>
+            @if (Request.IsAuthenticated && UserIdentity.IsInRole("User,Librarian,Administrator"))
+            {
+                <div class="lib-rent">
+                    @Html.ActionLink("Rent", "RentBook", "Rent", new { id = Model.Id }, new { @class = "btn btn-info btn-xs rent-button" })
+                </div>
+            }
+        </div>
+}

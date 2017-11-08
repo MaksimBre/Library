@@ -52,9 +52,9 @@ namespace Library.DataAccessLayer.DBAccess
 
         public IEnumerable<Book> Search(string name)
         {
-            using (SqlCommand command = new SqlCommand("EXEC BookSearch @Title ", connection))
+            using (SqlCommand command = new SqlCommand("EXEC BookSearch @TitleSearch ", connection))
             {
-                command.Parameters.Add("@Title", SqlDbType.NVarChar).Value = "%" + name + "%";
+                command.Parameters.Add("@TitleSearch", SqlDbType.NVarChar).Value = "%" + name + "%";
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -128,18 +128,12 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public void InsertBookGenre(Book book, Genre genre)
+        public void InsertBookGenre(int bookId, int genreId)
         {
-            if (book == null)
-                throw new ArgumentNullException("book", "Valid book is mandatory!");
-
-            if (genre == null)
-                throw new ArgumentNullException("genre", "Valid genre is mandatory!");
-
             using (SqlCommand command = new SqlCommand("EXEC BookInsertBookGenre @BookId, @GenreId ", connection))
             {
-                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
-                command.Parameters.Add("@GenreId", SqlDbType.Int).Value = genre.Id;
+                command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookId;
+                command.Parameters.Add("@GenreId", SqlDbType.Int).Value = genreId;
 
                 command.ExecuteScalar();
             }
@@ -162,35 +156,9 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public IEnumerable<BookRental> GetAllBookRentalsByUser(User user)
-        {
-            if (user == null)
-                throw new ArgumentNullException("user", "Valid user is mandatory!");
-
-            using (SqlCommand command = new SqlCommand("EXEC BookGetAllRentalsByUser @Id", connection))
-            {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    List<BookRental> bookRentals = new List<BookRental>();
-                    while (reader.Read())
-                        bookRentals.Add(CreateBookRental(reader));
-
-                    return bookRentals;
-                }
-            }
-        }
-
         private Book CreateBook(IDataReader reader)
         {
             return new Book((int)reader["Id"], reader["Title"] as string, (int)reader["NoOfPages"], (int)reader["StockCount"], (int)reader["WriterId"]);
         }
-
-        private BookRental CreateBookRental(IDataReader reader)
-        {
-            return new BookRental((int)reader["UserId"], (int)reader["BookId"], (DateTime)reader["RentalDate"], (DateTime)reader["ReturnDate"]);
-        }
-
     }
 }

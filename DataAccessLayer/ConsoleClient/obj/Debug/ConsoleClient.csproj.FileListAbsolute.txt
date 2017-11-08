@@ -24,3 +24,16 @@ D:\Max\Projects\Library\DataAccessLayer\ConsoleClient\obj\Debug\ConsoleClient.cs
 D:\Max\Projects\Library\DataAccessLayer\ConsoleClient\obj\Debug\ConsoleClient.csproj.CoreCompileInputs.cache
 D:\Max\Projects\Library\DataAccessLayer\ConsoleClient\obj\Debug\Library.DataAccessLayer.ConsoleClient.exe
 D:\Max\Projects\Library\DataAccessLayer\ConsoleClient\obj\Debug\Library.DataAccessLayer.ConsoleClient.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.ConsoleClient.exe.config
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.ConsoleClient.exe
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.ConsoleClient.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.DBAccess.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.Models.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.DBAccess.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.DBAccess.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.Models.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\bin\Debug\Library.DataAccessLayer.Models.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\obj\Debug\ConsoleClient.csprojResolveAssemblyReference.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\obj\Debug\ConsoleClient.csproj.CoreCompileInputs.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\obj\Debug\Library.DataAccessLayer.ConsoleClient.exe
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\DataAccessLayer\ConsoleClient\obj\Debug\Library.DataAccessLayer.ConsoleClient.pdb

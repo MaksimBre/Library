@@ -26,6 +26,14 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
+        public Role GetByName(string role)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                return Map(library.Roles.GetByName(role));
+            }
+        }
+
         public int Add(Role role)
         {
             using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))

@@ -59,11 +59,11 @@
     </ProjectReference>
     <ProjectReference Include="..\..\DataAccessLayer\Models\Models.csproj">
       <Project>{5ea9931f-3d01-4769-bd76-967a0601060c}</Project>
-      <Name>DataAccessLayer/Models</Name>
+      <Name>Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{9b801959-b497-46ee-8ae9-e6f817373851}</Project>
-      <Name>BusinessLogicLayer/Models</Name>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

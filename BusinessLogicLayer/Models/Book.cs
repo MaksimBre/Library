@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.BusinessLogicLayer.Models
 {
@@ -12,12 +8,12 @@ namespace Library.BusinessLogicLayer.Models
         private string title;
 
         public Book() { }
-        public Book(string title, int noOfPages, int stockCount, int writerId)
+        public Book(string title, int noOfPages, int stockCount, Writer writer)
         {
             Title = title;
             NoOfPages = noOfPages;
             StockCount = stockCount;
-            WriterId = writerId;
+            Writer = writer;
         }
 
         public string Title
@@ -48,6 +44,6 @@ namespace Library.BusinessLogicLayer.Models
         public int Id { get; set; }
         public int NoOfPages { get; set; }
         public int StockCount { get; set; }
-        public int WriterId { get; set; }
+        public Writer Writer { get; set; }
     }
 }

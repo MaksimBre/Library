@@ -1,0 +1,15 @@
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.BusinessLogicLayer.Managers.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.BusinessLogicLayer.Managers.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.BusinessLogicLayer.Managers.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.BusinessLogicLayer.Models.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.DataAccessLayer.DBAccess.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.DataAccessLayer.Models.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.DataAccessLayer.DBAccess.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.DataAccessLayer.DBAccess.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.DataAccessLayer.Models.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.DataAccessLayer.Models.dll.config
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\bin\Debug\Library.BusinessLogicLayer.Models.pdb
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\obj\Debug\Managers.csprojResolveAssemblyReference.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\obj\Debug\Managers.csproj.CoreCompileInputs.cache
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\obj\Debug\Library.BusinessLogicLayer.Managers.dll
+C:\Users\Morsus\Documents\GIT\Library\Library\Library\Library\BusinessLogicLayer\Managers\obj\Debug\Library.BusinessLogicLayer.Managers.pdb

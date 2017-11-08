@@ -1,0 +1,22 @@
+﻿@using Library.PresentationLayer.Web.Helpers;
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink(UserIdentity.UserName().ToString(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "lib-menuitem float-right usericon lib-hamburger-menu-item" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="lib-menuitem float-right logout lib-hamburger-menu-item">Log out</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="navbar-right lib-menulist lib-second-navbar">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "lib-menuitem float-right register lib-hamburger-menu-item" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "lib-menuitem float-right login lib-hamburger-menu-item" })</li>
+    </ul>
+}

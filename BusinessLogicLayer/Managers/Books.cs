@@ -26,6 +26,14 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
+        public IEnumerable<Book> Search(string title)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                return library.Books.Search(title).Select(book => Map(book));
+            }
+        }
+
         public int Add(Book book)
         {
             using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
@@ -50,21 +58,32 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
+        public void AddBookGenre(int bookId, int genreId)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                library.Books.InsertBookGenre(bookId, genreId);
+            }
+        }
+
         private Book Map(DataAccessLayer.Models.Book dbBook)
         {
             if (dbBook == null)
                 return null;
 
-            Book book = new Book(dbBook.Title, dbBook.NoOfPages, dbBook.StockCount, dbBook.WriterId) { Id = dbBook.Id };
+            Book book = new Book(dbBook.Title, dbBook.NoOfPages, dbBook.StockCount, new Writers().GetById(dbBook.WriterId))
+            {
+                Id = dbBook.Id
+            };
             return book;
         }
 
         private DataAccessLayer.Models.Book Map(Book book)
         {
             if (book == null)
-                throw new ArgumentNullException("book","Valid book is mandatory!");
+                throw new ArgumentNullException("book", "Valid book is mandatory!");
 
-            return new DataAccessLayer.Models.Book(book.Id, book.Title, book.NoOfPages, book.StockCount, book.WriterId);
+            return new DataAccessLayer.Models.Book(book.Id, book.Title, book.NoOfPages, book.StockCount, book.Writer.Id);
         }
     }
 }
