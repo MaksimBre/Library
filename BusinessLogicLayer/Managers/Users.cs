@@ -105,6 +105,21 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
+        public IEnumerable<BookRental> GetAllRentals()
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                return library.Users.GetAllBookRentals().Select(x => Map(x));
+            }
+        }
+        
+        public void DeleteUserRental(BookRental bookRental)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                library.Users.DeleteBookRentals(Map(bookRental));
+            }
+        }
         private User Map(DataAccessLayer.Models.User dbUser)
         {
             if (dbUser == null)

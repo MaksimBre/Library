@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Library.PresentationLayer.Web.Models.UserModel>
+﻿@model PagedList<Library.PresentationLayer.Web.Models.UserModel>
+@using PagedList;
+@using PagedList.Mvc;
 
 <h2>Manage users and roles</h2>
 
@@ -8,7 +10,7 @@
         <div>Username</div>
         <div>Date of birthday</div>
         <div>Date joined</div>
-        <div>Controls</div>
+        <div class="p25">Controls</div>
     </div>
     <div class="lib-writer-table-container">
         @foreach (var item in Model)
@@ -18,3 +20,9 @@
     </div>
 </div>
 @Html.ActionLink("Back to index", "Index", "Home", null, new { @class = "btn btn-primary btn-block" })
+<div class="lib-pagination-container">
+    <div class="lib-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount books
+    </div>
+</div>

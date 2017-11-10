@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Library.BusinessLogicLayer.Managers;
 using Library.PresentationLayer.Web.Models;
 using Library.PresentationLayer.Web.Helpers;
+using PagedList;
 
 namespace Library.PresentationLayer.Web.Controllers
 {
@@ -11,18 +12,19 @@ namespace Library.PresentationLayer.Web.Controllers
     {
         private readonly Writers WriterManager = new Writers();
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
             IEnumerable<WriterModel> models = WriterManager.GetAll().Select(x => (WriterModel)x);
+            PagedList<WriterModel> modelsPage = new PagedList<WriterModel>(models, page, pageSize);
 
             if (Request.IsAuthenticated)
             {
                 if (UserIdentity.IsInRole("Librarian,Administrator"))
                 {
-                    return View("Manage",models);
+                    return View("Manage", modelsPage);
                 }
             }
-            return View(models);
+            return View(modelsPage);
         }
 
         [Authorize(Roles = "Librarian,Administrator")]

@@ -1,4 +1,5 @@
 ﻿using Library.BusinessLogicLayer.Models;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -36,6 +37,8 @@ namespace Library.PresentationLayer.Web.Models
         public WriterModel Writer { get; set; }
 
         public string GenresList { get; set; }
+
+        public List<GenreModel> ListOfGenres { get; set; }
         
         public static implicit operator Book(BookModel bm)
         {

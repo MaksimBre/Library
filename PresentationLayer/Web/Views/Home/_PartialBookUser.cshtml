@@ -3,8 +3,6 @@
 @using Library.BusinessLogicLayer.Managers
 @using Library.PresentationLayer.Web.Helpers
 
-    @using (Html.BeginForm("Save", "Book", FormMethod.Post))
-    {
         @Html.AntiForgeryToken()
         <div class="lib-writer-table-row">
             @Html.HiddenFor(model => Model.Id)
@@ -36,4 +34,3 @@
                 </div>
             }
         </div>
-}

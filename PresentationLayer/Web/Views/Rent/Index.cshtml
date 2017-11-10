@@ -1,0 +1,33 @@
+﻿@model PagedList<Library.PresentationLayer.Web.Models.BookRentalModel>
+@using PagedList;
+@using PagedList.Mvc;
+@using Library.PresentationLayer.Web.Models
+@using Library.BusinessLogicLayer.Managers
+
+<h2>All rentals</h2>
+
+<div class="lib-writer-new-table">
+    <div class="lib-writer-table-header">
+        <div>User name</div>
+        <div>Book title</div>
+        <div>Writer name</div>
+        <div>Rental date</div>
+        <div>Return date</div>
+        <div>Controls</div>
+    </div>
+    <div class="lib-writer-table-container">
+        @foreach (var item in Model)
+        {
+            Html.RenderPartial("_PartialRent", item);   
+        }
+    </div>
+</div>
+@Html.ActionLink("Back to index", "Index", "Home", null, new { @class = "btn btn-primary btn-block" })
+
+
+<div class="lib-pagination-container">
+    <div class="lib-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount books
+    </div>
+</div>

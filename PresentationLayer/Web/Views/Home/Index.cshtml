@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Library.PresentationLayer.Web.Models.BookModel>
+﻿@model PagedList<Library.PresentationLayer.Web.Models.BookModel>
+@using PagedList;
+@using PagedList.Mvc;
 @using Library.PresentationLayer.Web.Helpers;
 
 <form method="get" action="@Url.Action("Index", "Home")">
@@ -19,6 +21,15 @@
         }
     </div>
             }
+@if (TempData.ContainsKey("BookRentalFail"))
+{
+    <div class="alert alert-warning">
+        @{
+            string[] rentalInfo = TempData["BookRentalFail"].ToString().Split('&');
+            @Html.Raw("User " + rentalInfo[0] + " already rented " + rentalInfo[1])
+        }
+    </div>
+            }
 
 <div class="lib-writer-new-table">
     <div class="lib-writer-table-header">
@@ -29,17 +40,21 @@
             <div class="p10">Stock count</div>
 
         }
-        <div>Number of pages</div>
-        <div>Stock count</div>
+        else
+        {
+            <div>Number of pages</div>
+            <div>Stock count</div>
+        }
+        
         <div>Writers name</div>
         <div>Genre</div>
-        @if (Request.IsAuthenticated && UserIdentity.IsInRole("User,Librarian"))
-        {
-            <div class="lib-rent">Controls</div>
-        }
-        else if (Request.IsAuthenticated && UserIdentity.IsInRole("Administrator"))
+        @if (Request.IsAuthenticated && UserIdentity.IsInRole("Administrator"))
         {
             <div>Controls</div>
+        }
+        else if (Request.IsAuthenticated)
+        {
+            <div class="lib-rent">Controls</div>
         }
     </div>
     <div class="lib-writer-table-container">
@@ -58,8 +73,17 @@
             }
         }
     </div>
+
+    
+
 </div>
 @if (Request.IsAuthenticated && UserIdentity.IsInRole("Librarian,Administrator"))
 {
     @Html.ActionLink("Add book", "Create", "Book", null, new { @class = "btn btn-block btn-primary" })
 }
+<div class="lib-pagination-container">
+    <div class="lib-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount books
+    </div>
+</div>

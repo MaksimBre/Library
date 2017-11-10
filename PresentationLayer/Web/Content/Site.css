@@ -28,6 +28,9 @@ textarea {
 .p10{
     width:10%;
 }
+.p25{
+    width:25%;
+}
 .lib-menuitem {
     font-family: 'Julius Sans One', sans-serif;
     font-weight: bold;
@@ -177,6 +180,9 @@ textarea {
 .max280{
     max-width:280px;
 }
+.max50{
+    max-width:50px !important;
+}
 
 .lib-writer-new-table{
     background:white;
@@ -229,7 +235,7 @@ textarea {
     width: auto;
     max-width: unset;
     border: 0;
-    box-shadow: 0;
+    box-shadow: none;
     overflow-x: hidden;
     outline: none;
 }
@@ -238,7 +244,7 @@ textarea {
     width: 100%;
     max-width: unset;
     border: 0;
-    box-shadow: 0;
+    box-shadow: none;
     overflow-x: hidden;
     outline: none;
     resize: vertical;
@@ -253,6 +259,13 @@ textarea {
 .lib-user-role-edit > .lib-checkbox{
     width:30px;
     height:30px;
+}
+.lib-pagination-container{
+    width:100%;
+    text-align:center;
+}
+.lib-pagination{
+    display:inline-block;
 }
 
 @media screen and (max-width: 767px){

@@ -1,0 +1,26 @@
+﻿@model Library.PresentationLayer.Web.Models.BookRentalModel
+@using Library.PresentationLayer.Web.Models
+@using Library.BusinessLogicLayer.Managers
+
+@using (Html.BeginForm("Return", "Rent", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="lib-writer-table-row">
+        @Html.HiddenFor(model => Model.UserId)
+        @Html.HiddenFor(model => Model.BookId)
+        @{
+            Books BookManager = new Books();
+            Users UserManager = new Users();
+            BookModel book = BookManager.GetById(Model.BookId);
+            UserModel user = UserManager.GetById(Model.UserId);
+
+            <div>@user.Name</div>
+            <div>@book.Title</div>
+            <div>@book.Writer.Name</div>
+            <div>@Model.RentalDate.ToShortDateString()</div>
+            <div>@Model.ReturnDate.ToShortDateString() </div>
+            <div><input type="submit" value="Return" class="btn btn-success btn-xs" /></div>
+        }
+
+    </div>
+            }

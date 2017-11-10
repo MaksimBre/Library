@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Library.PresentationLayer.Web.Models.WriterModel>
+﻿@model PagedList<Library.PresentationLayer.Web.Models.WriterModel>
+@using PagedList;
+@using PagedList.Mvc;
 
 <h2>Manage writers</h2>
 @Html.ActionLink("Add a new writer", "Create", "Writer", null, new { @class = "btn btn-block btn-info" })
@@ -18,3 +20,9 @@
     </div>
 </div>
 @Html.ActionLink("Back to index", "Index", "Home", null, new { @class = "btn btn-primary btn-block" })
+<div class="lib-pagination-container">
+    <div class="lib-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount writers
+    </div>
+</div>

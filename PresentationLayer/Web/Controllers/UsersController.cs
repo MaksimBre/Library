@@ -1,6 +1,7 @@
 ﻿using Library.BusinessLogicLayer.Managers;
 using Library.PresentationLayer.Web.Helpers;
 using Library.PresentationLayer.Web.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,11 @@ namespace Library.PresentationLayer.Web.Controllers
         private readonly Roles RoleManager = new Roles();
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
             IEnumerable<UserModel> models = UserManager.GetAll().Select(x => (UserModel)x);
-            return View(models);
+            PagedList<UserModel> modelsPage = new PagedList<UserModel>(models, page, pageSize);
+            return View(modelsPage);
         }
 
         [Authorize(Roles = "Administrator")]
@@ -74,15 +76,11 @@ namespace Library.PresentationLayer.Web.Controllers
             UserManager.DeleteAllUserRoles(newModel);
             string roleList = model.RoleList;
 
-            if(roleList == "" || roleList == null)
+            if (roleList == "" || roleList == null)
             {
                 return RedirectToAction("Index", "Users");
             }
-            //roleList.Remove(0,roleList.Length-1);
             string[] roles = roleList.Split('/');
-            //int[] roleIds = Array.ConvertAll(roles, int.Parse);
-            //int[] roleIds = roles.Select(int.Parse).ToArray();
-            //int[] roleIds = Array.ConvertAll(roles, s => int.Parse(s));
 
             for (int i = 0; i < roles.Length-1; i++)
             {
@@ -101,12 +99,14 @@ namespace Library.PresentationLayer.Web.Controllers
         }
 
         [Authorize]
-        public ActionResult MyRentals()
+        public ActionResult MyRentals(int page = 1, int pageSize = 15)
         {
             UserModel userModel = UserManager.GetByEmail(UserIdentity.Email());
             IEnumerable<BookRentalModel> rentals = UserManager.GetAllRentalsByUser(userModel).Select(x => (BookRentalModel)x);
 
-            return View(rentals);
+            PagedList<BookRentalModel> modelsPage = new PagedList<BookRentalModel>(rentals, page, pageSize);
+
+            return View(modelsPage);
         }
     }
 }

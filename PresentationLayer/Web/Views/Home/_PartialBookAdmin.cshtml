@@ -1,7 +1,6 @@
 ﻿@model Library.PresentationLayer.Web.Models.BookModel
 @using Library.PresentationLayer.Web.Models
 @using Library.BusinessLogicLayer.Managers
-@using Library.PresentationLayer.Web.Helpers
 
 @using (Html.BeginForm("Save", "Book", FormMethod.Post))
 {
@@ -9,11 +8,18 @@
     <div class="lib-writer-table-row">
         @Html.HiddenFor(model => Model.Id)
         <div>@Html.EditorFor(model => Model.Title, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
-        <div class="p10">@Html.EditorFor(model => Model.NoOfPages, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
-        <div class="p10">@Html.EditorFor(model => Model.StockCount, new { htmlAttributes = new { @class = "lib-transparent-input" } })</div>
+        <div class="p10">@Html.EditorFor(model => Model.NoOfPages, new { htmlAttributes = new { @class = "lib-transparent-input max50" } }) </div>
+        <div class="p10">@Html.EditorFor(model => Model.StockCount, new { htmlAttributes = new { @class = "lib-transparent-input max50" } })</div>
 
-        @*dropdownlist*@
-        <div>@Html.DisplayFor(model => Model.Writer.Name, new { htmlAttributes = new { @class = "lib-transparent-input" } }) </div>
+
+        @{
+            Writers WriterManager = new Writers();
+            IEnumerable<WriterModel> writers = WriterManager.GetAll().Select(x => (WriterModel)x);
+            var writersList = new SelectList(writers, "Id", "Name");
+        }
+        <div>
+            @Html.DropDownListFor(model => model.Writer.Id, writersList, new { @class = "form-control lib-transparent-input" })
+        </div>
 
         <div>
             @{
@@ -34,9 +40,9 @@
         </div>
         <div>
             <input type="submit" value="Save" class="btn btn-success btn-xs" />
+            @Html.ActionLink("Genres", "EditBookGenre", "Book", new { id = Model.Id }, new { @class = "btn btn-default btn-xs" })
+            @Html.ActionLink("Delete", "Delete", "Book", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs delete-button" })
             @Html.ActionLink("Rent", "RentBook", "Rent", new { id = Model.Id }, new { @class = "btn btn-info btn-xs rent-button" })
-            @Html.ActionLink("Delete", "Delete", "Book", new { id = Model.Id }, new { @class = "btn btn-warning btn-xs" })
-            @Html.ActionLink("Genres", "GenreManager", "Book", new { id = Model.Id }, new { @class = "btn btn-default btn-xs" })
         </div>
 
     </div>

@@ -208,18 +208,12 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public void DeleteBookRentals(User user, Book book)
+        public void DeleteBookRentals(BookRental bookRental)
         {
-            if (user == null)
-                throw new ArgumentNullException("user", "Valid user is mandatory!");
-
-            if (book == null)
-                throw new ArgumentNullException("book", "Valid book is mandatory!");
-
             using (SqlCommand command = new SqlCommand("EXEC UserDeleteBookRentals @UserId, @BookId ", connection))
             {
-                command.Parameters.Add("@UserId", SqlDbType.Int).Value = user.Id;
-                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = bookRental.UserId;
+                command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookRental.BookId;
 
                 command.ExecuteNonQuery();
             }
@@ -234,6 +228,21 @@ namespace Library.DataAccessLayer.DBAccess
             {
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = user.Id;
 
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    List<BookRental> bookRentals = new List<BookRental>();
+                    while (reader.Read())
+                        bookRentals.Add(CreateBookRental(reader));
+
+                    return bookRentals;
+                }
+            }
+        }
+
+        public IEnumerable<BookRental> GetAllBookRentals()
+        {
+            using (SqlCommand command = new SqlCommand("EXEC BookGetAllRentals", connection))
+            {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     List<BookRental> bookRentals = new List<BookRental>();

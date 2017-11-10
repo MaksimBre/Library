@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Library.PresentationLayer.Web.Models.GenreModel>
+﻿@model PagedList<Library.PresentationLayer.Web.Models.GenreModel>
+@using PagedList;
+@using PagedList.Mvc;
 @using Library.PresentationLayer.Web.Models
 
 <h2>Add a new genre</h2>
@@ -17,5 +19,11 @@
             {
                 Html.RenderPartial("_PartialGenreEdit", item);
             }
+    </div>
+    <div class="lib-pagination-container">
+        <div class="lib-pagination">
+            @Html.PagedListPager(Model, page => Url.Action("GenreEdit", new { page, pageSize = Model.PageSize }))
+            Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount genres
+        </div>
     </div>
 </div>

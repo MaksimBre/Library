@@ -50,11 +50,11 @@ namespace Library.BusinessLogicLayer.Managers
             }
         }
 
-        public void Delete(Book book)
+        public void Delete(int id)
         {
             using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
             {
-                library.Books.Delete(Map(book));
+                library.Books.Delete(id);
             }
         }
 
@@ -63,6 +63,14 @@ namespace Library.BusinessLogicLayer.Managers
             using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
             {
                 library.Books.InsertBookGenre(bookId, genreId);
+            }
+        }
+
+        public void DeleteAllBookGenres(Book book)
+        {
+            using (DataAccessLayer.DBAccess.Library library = new DataAccessLayer.DBAccess.Library(Settings.Default.LibraryDbConnection))
+            {
+                library.Books.DeleteAllBookGenres(Map(book));
             }
         }
 

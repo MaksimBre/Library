@@ -19,6 +19,8 @@ namespace Library.PresentationLayer.Web.Models
         [Required]
         public string Name { get; set; }
 
+        public bool IsChecked { get; set; }
+
         public static implicit operator Genre(GenreModel gm)
         {
             Genre genre = new Genre(gm.Name)

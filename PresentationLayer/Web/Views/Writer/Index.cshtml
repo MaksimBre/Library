@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Library.PresentationLayer.Web.Models.WriterModel>
+﻿@model PagedList<Library.PresentationLayer.Web.Models.WriterModel>
+@using PagedList;
+@using PagedList.Mvc;
+
 <h2>List of writers</h2>
 <div class="lib-writer-new-table">
     <div class="lib-writer-table-header">
@@ -17,4 +20,9 @@
         }
     </div>
 </div>
-
+<div class="lib-pagination-container">
+    <div class="lib-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount writers
+    </div>
+</div>

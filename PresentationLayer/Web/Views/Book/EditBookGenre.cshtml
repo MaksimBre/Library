@@ -1,0 +1,42 @@
+﻿@model Library.PresentationLayer.Web.Models.BookModel
+@using Library.BusinessLogicLayer.Managers
+@using Library.PresentationLayer.Web.Models
+
+<h2>@Html.DisplayFor(model => model.Title) genres edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        @{
+            Genres GenreManager = new Genres();
+            List<GenreModel> genres = Model.ListOfGenres;
+        }
+        <div class="form-group">
+            @Html.Label("Genre/s", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="lib-checkbox-container">
+                    @foreach (GenreModel genre in genres)
+                    {
+                        <div class="lib-checkbox-group">
+                            @Html.Label(genre.Name, new { @class = "lib-checkbox-label" })
+                            @Html.CheckBox(genre.Id.ToString(), genre.IsChecked, new { @class = "lib-checkbox" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.GenresList)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+}

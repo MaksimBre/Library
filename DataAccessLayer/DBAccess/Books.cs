@@ -116,14 +116,11 @@ namespace Library.DataAccessLayer.DBAccess
             }
         }
 
-        public void Delete(Book book)
+        public void Delete(int id)
         {
-            if (book == null)
-                throw new ArgumentNullException("book", "Valid book is mandatory!");
-
             using (SqlCommand command = new SqlCommand("EXEC BookDelete @Id ", connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = book.Id;
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
                 command.ExecuteNonQuery();
             }
         }
@@ -151,6 +148,16 @@ namespace Library.DataAccessLayer.DBAccess
             {
                 command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
                 command.Parameters.Add("@GenreId", SqlDbType.Int).Value = genre.Id;
+
+                command.ExecuteScalar();
+            }
+        }
+
+        public void DeleteAllBookGenres(Book book)
+        {
+            using (SqlCommand command = new SqlCommand("EXEC BookDeleteAllBookGenres @BookId", connection))
+            {
+                command.Parameters.Add("@BookId", SqlDbType.Int).Value = book.Id;
 
                 command.ExecuteScalar();
             }
